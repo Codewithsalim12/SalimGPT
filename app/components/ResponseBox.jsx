@@ -13,7 +13,7 @@ export default function ResponseBox({ messages, loading }) {
   }, [messages, loading]);
 
   return (
-    <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+    <div className="bg-gray-100 p-4 rounded-lg shadow-md mt-24">
       {messages.map((message, index) => (
         <div
           key={index}
