@@ -14,6 +14,9 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "SalimGPT",
   description: "Increase Your Productivity with this Ai",
+  other: {
+    "google-site-verification": "8jqncciGTiWFPrLV4dwBQKIc9eyYjzesFcWYuP6H1CE",
+  },
 };
 
 export default function RootLayout({ children }) {
