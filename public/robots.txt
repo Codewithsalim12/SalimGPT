@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://salimgpt.onrender.com/sitemap.xml
