@@ -1,22 +1,10 @@
-export const runtime = "edge"; // Use "edge" for faster response
+export const runtime = "edge"; // Faster edge runtime
 
 export async function GET() {
   const urls = [
-    {
-      loc: "https://salimgpt.onrender.com/",
-      lastmod: new Date().toISOString(),
-      priority: 1.0,
-    },
-    {
-      loc: "https://salimgpt.onrender.com/about",
-      lastmod: new Date().toISOString(),
-      priority: 0.8,
-    },
-    {
-      loc: "https://salimgpt.onrender.com/contact",
-      lastmod: new Date().toISOString(),
-      priority: 0.7,
-    },
+    { loc: "https://salimgpt.onrender.com/", priority: 1.0 },
+    { loc: "https://salimgpt.onrender.com/about", priority: 0.8 },
+    { loc: "https://salimgpt.onrender.com/contact", priority: 0.7 },
   ];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -26,7 +14,7 @@ export async function GET() {
         (url) => `
       <url>
         <loc>${url.loc}</loc>
-        <lastmod>${url.lastmod}</lastmod>
+        <lastmod>${new Date().toISOString()}</lastmod>
         <priority>${url.priority}</priority>
       </url>
     `
@@ -35,8 +23,6 @@ export async function GET() {
   </urlset>`;
 
   return new Response(sitemap, {
-    headers: {
-      "Content-Type": "application/xml",
-    },
+    headers: { "Content-Type": "application/xml" },
   });
 }
