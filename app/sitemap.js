@@ -1,3 +1,5 @@
+export const runtime = "edge"; // Use "edge" for faster response
+
 export async function GET() {
   const urls = [
     {
