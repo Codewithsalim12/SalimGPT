@@ -8,8 +8,8 @@ import InputBox from "./components/InputBox";
 export default function Home() {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [inputHeight, setInputHeight] = useState(0); // State to store input area height
-  const inputRef = useRef(null); // Ref to track the fixed input area
+  const [inputHeight, setInputHeight] = useState(0);
+  const inputRef = useRef(null);
 
   // Calculate the height of the fixed input area
   useEffect(() => {
@@ -35,6 +35,10 @@ export default function Home() {
       });
       const data = await res.json();
 
+      if (!data.response) {
+        throw new Error("Invalid response from API");
+      }
+
       setMessages((prevMessages) => [
         ...prevMessages,
         { role: "ai", content: data.response },
@@ -57,18 +61,18 @@ export default function Home() {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header />
       <main
-        className="container mx-auto p-4 flex-1"
-        style={{ paddingBottom: `${inputHeight}px` }} // Dynamically set padding-bottom
+        className="container mt-10 mx-auto p-4 flex-1 pt-20" // Add padding-top to avoid overlap with the fixed header
+        style={{ paddingBottom: `${inputHeight}px` }}
       >
         <ResponseBox messages={messages} loading={loading} />
       </main>
 
       {/* Fixed input area at the bottom */}
       <div
-        ref={inputRef} // Attach ref to the fixed input area
+        ref={inputRef}
         className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200"
       >
-        <div className="container mx-auto p-4">
+        <div className="container mx-auto p-4 pt-10">
           <InputBox onSubmit={handleSubmit} disabled={loading} />
         </div>
       </div>

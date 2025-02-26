@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import CodeBlock from "./CodeBlock";
 
 export default function ResponseBox({ messages, loading }) {
   const messagesEndRef = useRef(null);
@@ -13,7 +14,7 @@ export default function ResponseBox({ messages, loading }) {
   }, [messages, loading]);
 
   return (
-    <div className="bg-gray-100 p-4 rounded-lg shadow-md mt-24">
+    <div className="flex-1 overflow-y-auto p-4">
       {messages.map((message, index) => (
         <div
           key={index}
@@ -28,9 +29,13 @@ export default function ResponseBox({ messages, loading }) {
                 : "bg-gray-200 text-gray-800"
             }`}
           >
-            <pre className="whitespace-pre-wrap break-words font-sans text-sm">
-              {message.content}
-            </pre>
+            {message.content.startsWith("```") ? (
+              <CodeBlock code={message.content.replace(/```/g, "")} />
+            ) : (
+              <pre className="whitespace-pre-wrap break-words font-sans text-sm">
+                {message.content}
+              </pre>
+            )}
           </div>
         </div>
       ))}
